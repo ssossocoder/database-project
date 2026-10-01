@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { collectPages } from '../database-project/app/src/lib/server/public-data/client.ts';
 import { normalizeTrade, normalizeUnit, parseApplyhome, parseAptTrades, parseLegalRegions, tenThousandWon } from '../database-project/app/src/lib/server/public-data/parsers.ts';
-import { buildRequestUrl, normalizeServiceKey, PublicApiError, redactSecrets } from '../database-project/app/src/lib/server/public-data/transport.ts';
+import { buildRequestUrl, normalizeServiceKey, PublicApiError, redactSecrets, requestPublicData } from '../database-project/app/src/lib/server/public-data/transport.ts';
 import type { DataPage, ResponseEvidence } from '../database-project/app/src/lib/server/public-data/types.ts';
 
 function evidence(raw: string): ResponseEvidence {
@@ -107,4 +107,41 @@ test('빈 페이지·페이지 상한·수집 중 건수 변경은 전체 수집
   await assert.rejects(collectPages(async index => page(index, 3, index === 1 ? [{}, {}] : [])), (error: unknown) => error instanceof PublicApiError && error.code === 'INCOMPLETE_PAGING');
   await assert.rejects(collectPages(async index => page(index, 3, [{}, {}]), 1), (error: unknown) => error instanceof PublicApiError && error.code === 'PAGE_LIMIT_REACHED');
   await assert.rejects(collectPages(async index => page(index, index === 1 ? 3 : 4, [{}, {}])), (error: unknown) => error instanceof PublicApiError && error.code === 'DATA_CHANGED_DURING_PAGING');
+});
+
+test('HTTP 인증 오류는 재시도하지 않고 키가 든 응답은 오류에 포함하지 않는다', async context => {
+  const previousEnv = process.env;
+  process.env = { ...previousEnv, DATA_GO_KR_SERVICE_KEY: 'fixture+/key=', APPLYHOME_SERVICE_KEY: '' };
+  context.after(() => { process.env = previousEnv; });
+  const mockedFetch = context.mock.method(globalThis, 'fetch', async () => new Response('fixture+/key=', { status: 403 }));
+  await assert.rejects(requestPublicData('applyhome', 'https://api.odcloud.kr/api/test', {}), (error: unknown) => {
+    return error instanceof PublicApiError && error.code === 'AUTH_PENDING_OR_DENIED' && error.httpStatus === 403 && !error.message.includes('fixture');
+  });
+  assert.equal(mockedFetch.mock.callCount(), 1);
+});
+
+test('일시적인 HTTP 오류는 한 번 재시도하고 정상 응답의 인증키를 제거한다', async context => {
+  const previousEnv = process.env;
+  process.env = { ...previousEnv, DATA_GO_KR_SERVICE_KEY: 'fixture+/key=', APPLYHOME_SERVICE_KEY: '' };
+  context.after(() => { process.env = previousEnv; });
+  let calls = 0;
+  context.mock.method(globalThis, 'fetch', async (_url: unknown, options?: RequestInit) => {
+    assert.equal(options?.redirect, 'error');
+    assert.equal(options?.cache, 'no-store');
+    return ++calls === 1 ? new Response('', { status: 503 }) : new Response('fixture+/key=');
+  });
+  const result = await requestPublicData('applyhome', 'https://api.odcloud.kr/api/test', { page: 1 });
+  assert.equal(calls, 2);
+  assert.equal(result.raw, '[REDACTED]');
+  assert.deepEqual(result.params, { page: 1 });
+  assert.ok(!result.endpoint.includes('serviceKey'));
+});
+
+test('키가 없으면 외부 요청을 보내지 않는다', async context => {
+  const previousEnv = process.env;
+  process.env = { ...previousEnv, DATA_GO_KR_SERVICE_KEY: '', APPLYHOME_SERVICE_KEY: '' };
+  context.after(() => { process.env = previousEnv; });
+  const mockedFetch = context.mock.method(globalThis, 'fetch', async () => new Response(''));
+  await assert.rejects(requestPublicData('applyhome', 'https://api.odcloud.kr/api/test', {}), (error: unknown) => error instanceof PublicApiError && error.code === 'MISSING_KEY');
+  assert.equal(mockedFetch.mock.callCount(), 0);
 });

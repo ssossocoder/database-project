@@ -7,10 +7,11 @@
 저장소 루트에서 Node.js 24 이상을 사용한다. 초기 설치와 실행 명령은 다음과 같다.
 
 ```sh
+nvm install
+nvm use
 npm ci
+npm run check
 npm run api:verify -- --as-of=2026-09-29 --month=202608
-npm run typecheck
-npm test
 ```
 
 기본 실행은 KST 기준 오늘을 판단일로, 직전 달을 거래 표본 계약월로 사용한다. 특정 서비스만 확인할 수도 있다.
@@ -25,11 +26,11 @@ npm run api:verify -- --services=announcements,results
 ## 환경변수와 Next.js에서의 사용
 
 - 루트 `.env`: `npm run api:verify`가 `node --env-file=.env`로 읽는다.
-- 이 디렉터리의 `.env`: 향후 이 폴더를 Next.js 앱 루트로 실행할 때 자동으로 읽는다. 현재 두 파일에는 같은 계정의 공통 인증키를 설정해 두었다.
+- 이 디렉터리의 `.env`: 현재 필수 파일이 아니다. 향후 이 폴더를 Next.js 앱 루트로 실행할 때 별도로 만들면 자동으로 읽는다.
 - `DATA_GO_KR_SERVICE_KEY`: 공공데이터포털 개인 인증키의 Decoding 값. 키 하나를 네 서비스에서 공유하지만 활용신청은 서비스별로 필요하다.
 - `APPLYHOME_SERVICE_KEY`, `MOLIT_SERVICE_KEY`, `MOIS_SERVICE_KEY`: 서비스별 키가 다를 때만 설정한다. 빈 값이면 공통 키를 사용한다.
 
-키를 갱신할 때는 두 로컬 `.env`를 함께 수정한다. `.env.example`에는 실제 값이 없다. 클라이언트로 노출되는 `NEXT_PUBLIC_` 변수에 인증키를 넣지 않는다. Next.js의 환경파일 로딩·공개 변수 규칙은 [공식 문서](https://nextjs.org/docs/app/guides/environment-variables)를 따른다.
+현재 키는 루트 `.env`에서 관리한다. 향후 앱의 `.env`도 만들었다면 키 갱신 시 함께 수정한다. `.env.example`에는 실제 값이 없다. 클라이언트로 노출되는 `NEXT_PUBLIC_` 변수에 인증키를 넣지 않는다. Next.js의 환경파일 로딩·공개 변수 규칙은 [공식 문서](https://nextjs.org/docs/app/guides/environment-variables)를 따른다.
 
 Next.js의 Server Component, Route Handler, 서버 수집 작업에서는 다음 진입점을 사용한다. `server-only`가 클라이언트 컴포넌트의 잘못된 import를 차단한다. [서버 전용 코드 안내](https://nextjs.org/docs/app/getting-started/server-and-client-components#preventing-environment-poisoning)
 

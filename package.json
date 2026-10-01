@@ -5,6 +5,8 @@
   "type": "module",
   "engines": { "node": ">=24.0.0" },
   "scripts": {
+    "env:check": "node --env-file-if-exists=.env scripts/check-environment.ts",
+    "check": "npm run env:check && npm run typecheck && npm test",
     "api:verify": "node --env-file=.env scripts/verify-public-apis.ts",
     "test": "node --test tests/*.test.ts",
     "typecheck": "tsc --noEmit"

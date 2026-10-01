@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "runId": "2026-09-29T05-47-27-264Z",
-  "startedAt": "2026-09-29T05:47:27.264Z",
-  "finishedAt": "2026-09-29T05:47:29.430Z",
-  "asOf": "2026-09-29",
+  "runId": "2026-10-01T02-00-00-967Z",
+  "startedAt": "2026-10-01T02:00:00.967Z",
+  "finishedAt": "2026-10-01T02:00:07.937Z",
+  "asOf": "2026-10-01",
   "month": "202608",
   "services": [
     "announcements",
@@ -325,8 +325,8 @@
     {
       "name": "apt-trades-11620-202608",
       "status": "passed",
-      "rowCount": 119,
-      "matchedTotal": 119,
+      "rowCount": 120,
+      "matchedTotal": 120,
       "pages": 2,
       "complete": true,
       "httpStatuses": [
@@ -380,8 +380,8 @@
           "cancellationStatus": "not_reported",
           "cancellationDate": null
         },
-        "legalDongCodeTenDigitRows": 119,
-        "officialLegalDongMatchRows": 119,
+        "legalDongCodeTenDigitRows": 120,
+        "officialLegalDongMatchRows": 120,
         "reportedCancelledRows": 6,
         "cancellationUnknownRows": 0,
         "transactionUniqueIdVerified": false,
@@ -561,8 +561,8 @@
     {
       "name": "apt-trades-11545-202608",
       "status": "passed",
-      "rowCount": 107,
-      "matchedTotal": 107,
+      "rowCount": 108,
+      "matchedTotal": 108,
       "pages": 2,
       "complete": true,
       "httpStatuses": [
@@ -608,17 +608,17 @@
         "contractMonth": "202608",
         "priceUnitInSource": "만원",
         "sample": {
-          "apartmentName": "독산현대",
-          "apartmentSequence": "11545-8",
-          "legalDongCode": "1154510200",
-          "exclusiveAreaM2": 83.73,
-          "priceWon": "660000000",
+          "apartmentName": "무지개",
+          "apartmentSequence": "11545-38",
+          "legalDongCode": "1154510300",
+          "exclusiveAreaM2": 67.93,
+          "priceWon": "690000000",
           "cancellationStatus": "not_reported",
           "cancellationDate": null
         },
-        "legalDongCodeTenDigitRows": 107,
-        "officialLegalDongMatchRows": 107,
-        "reportedCancelledRows": 0,
+        "legalDongCodeTenDigitRows": 108,
+        "officialLegalDongMatchRows": 108,
+        "reportedCancelledRows": 1,
         "cancellationUnknownRows": 0,
         "transactionUniqueIdVerified": false,
         "duplicatesRemoved": false
@@ -626,7 +626,7 @@
     }
   ],
   "warnings": [],
-  "rawEvidenceDirectory": "database-project/.local/api-validation/2026-09-29T05-47-27-264Z",
+  "rawEvidenceDirectory": "database-project/.local/api-validation/2026-10-01T02-00-00-967Z",
   "limitations": [
     "전국 공고는 20건 표본이며 최신순 정렬은 검증하지 않았다.",
     "세 구의 한 계약월을 확인했다. 최근 12개월 전체·주소 매칭·가격 비교·DB 적재를 검증한 것은 아니다.",
