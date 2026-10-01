@@ -1,0 +1,101 @@
+%% 청약 의사결정 노트 / 1차 논리 ERD 초안
+%% 업무 속성은 proposal.md의 테이블 표를 참조한다.
+%% Mermaid에서 점선은 비식별 관계, 실선은 식별 관계를 뜻한다.
+erDiagram
+    direction TB
+
+    announcement {
+        bigint id PK
+        bigint last_source_record_id FK
+    }
+    unit_type {
+        bigint id PK
+        bigint announcement_id FK
+        bigint last_source_record_id FK
+    }
+    allocation {
+        bigint id PK
+        bigint unit_type_id FK
+        bigint last_source_record_id FK
+    }
+    competition_snapshot {
+        bigint id PK
+        bigint unit_type_id FK
+        bigint source_record_id FK
+    }
+    winning_score_snapshot {
+        bigint id PK
+        bigint unit_type_id FK
+        bigint source_record_id FK
+    }
+    region {
+        string region_code PK
+        string parent_code FK
+        bigint last_source_record_id FK
+    }
+    address_match {
+        bigint id PK
+        bigint announcement_id FK
+        string region_code FK
+    }
+    apartment_trade {
+        bigint id PK
+        string region_code FK
+        bigint last_source_record_id FK
+    }
+    app_user {
+        bigint id PK
+    }
+    watchlist {
+        bigint id PK
+        bigint app_user_id FK
+        bigint announcement_id FK
+    }
+    user_note {
+        bigint id PK
+        bigint watchlist_id FK
+    }
+    comparison_set {
+        bigint id PK
+        bigint app_user_id FK
+        bigint unit_type_id FK
+        string region_code FK
+    }
+    comparison_trade {
+        bigint comparison_set_id PK, FK
+        bigint apartment_trade_id PK, FK
+        bigint source_record_id FK
+    }
+    ingestion_run {
+        bigint id PK
+    }
+    source_record {
+        bigint id PK
+        bigint ingestion_run_id FK
+    }
+
+    announcement ||..o{ unit_type : has_models
+    unit_type ||..o{ allocation : has_supply
+    unit_type ||..o{ competition_snapshot : observed_competition
+    unit_type ||..o{ winning_score_snapshot : observed_scores
+    region |o..o{ region : parent_region
+    announcement ||..o{ address_match : matching_attempts
+    region |o..o{ address_match : matched_region
+    region ||..o{ apartment_trade : recorded_in
+    app_user ||..o{ watchlist : owns
+    announcement ||..o{ watchlist : watched_by
+    watchlist ||..o{ user_note : has_notes
+    app_user ||..o{ comparison_set : saves
+    unit_type ||..o{ comparison_set : compared_at
+    region ||..o{ comparison_set : comparison_region
+    comparison_set ||--o{ comparison_trade : includes
+    apartment_trade ||--o{ comparison_trade : used_in
+    ingestion_run ||..o{ source_record : captures
+    source_record ||..o{ announcement : source_of
+    source_record ||..o{ unit_type : source_of
+    source_record ||..o{ allocation : source_of
+    source_record ||..o{ region : source_of
+    source_record ||..o{ apartment_trade : source_of
+    source_record ||..o{ competition_snapshot : evidence_for
+    source_record ||..o{ winning_score_snapshot : evidence_for
+    source_record ||..o{ comparison_trade : frozen_evidence

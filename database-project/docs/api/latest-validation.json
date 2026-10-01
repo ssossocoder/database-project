@@ -1,0 +1,637 @@
+{
+  "version": 1,
+  "runId": "2026-09-29T05-47-27-264Z",
+  "startedAt": "2026-09-29T05:47:27.264Z",
+  "finishedAt": "2026-09-29T05:47:29.430Z",
+  "asOf": "2026-09-29",
+  "month": "202608",
+  "services": [
+    "announcements",
+    "results",
+    "regions",
+    "trades"
+  ],
+  "outcomes": [
+    {
+      "name": "apt-announcements",
+      "status": "passed",
+      "rowCount": 20,
+      "matchedTotal": 881,
+      "pages": 1,
+      "complete": false,
+      "httpStatuses": [
+        200
+      ],
+      "fieldNames": [
+        "BSNS_MBY_NM",
+        "CNSTRCT_ENTRPS_NM",
+        "CNTRCT_CNCLS_BGNDE",
+        "CNTRCT_CNCLS_ENDDE",
+        "GNRL_RNK1_CRSPAREA_ENDDE",
+        "GNRL_RNK1_CRSPAREA_RCPTDE",
+        "GNRL_RNK1_ETC_AREA_ENDDE",
+        "GNRL_RNK1_ETC_AREA_RCPTDE",
+        "GNRL_RNK1_ETC_GG_ENDDE",
+        "GNRL_RNK1_ETC_GG_RCPTDE",
+        "GNRL_RNK2_CRSPAREA_ENDDE",
+        "GNRL_RNK2_CRSPAREA_RCPTDE",
+        "GNRL_RNK2_ETC_AREA_ENDDE",
+        "GNRL_RNK2_ETC_AREA_RCPTDE",
+        "GNRL_RNK2_ETC_GG_ENDDE",
+        "GNRL_RNK2_ETC_GG_RCPTDE",
+        "HMPG_ADRES",
+        "HOUSE_DTL_SECD",
+        "HOUSE_DTL_SECD_NM",
+        "HOUSE_MANAGE_NO",
+        "HOUSE_NM",
+        "HOUSE_SECD",
+        "HOUSE_SECD_NM",
+        "HSSPLY_ADRES",
+        "HSSPLY_ZIP",
+        "IMPRMN_BSNS_AT",
+        "LRSCL_BLDLND_AT",
+        "MDAT_TRGET_AREA_SECD",
+        "MDHS_TELNO",
+        "MVN_PREARNGE_YM",
+        "NPLN_PRVOPR_PUBLIC_HOUSE_AT",
+        "NSPRC_NM",
+        "PARCPRC_ULS_AT",
+        "PBLANC_NO",
+        "PBLANC_URL",
+        "PRZWNER_PRESNATN_DE",
+        "PUBLIC_HOUSE_EARTH_AT",
+        "PUBLIC_HOUSE_SPCLW_APPLC_AT",
+        "RCEPT_BGNDE",
+        "RCEPT_ENDDE",
+        "RCRIT_PBLANC_DE",
+        "RENT_SECD",
+        "RENT_SECD_NM",
+        "SPECLT_RDN_EARTH_AT",
+        "SPSPLY_RCEPT_BGNDE",
+        "SPSPLY_RCEPT_ENDDE",
+        "SUBSCRPT_AREA_CODE",
+        "SUBSCRPT_AREA_CODE_NM",
+        "TOT_SUPLY_HSHLDCO"
+      ],
+      "checks": {
+        "ordinaryAptCode": "01",
+        "uniqueAnnouncementKeys": 20,
+        "sampleLimit": 20,
+        "isLatestOrderingVerified": false
+      }
+    },
+    {
+      "name": "apt-unit-types",
+      "status": "passed",
+      "rowCount": 5,
+      "matchedTotal": 5,
+      "pages": 1,
+      "complete": true,
+      "httpStatuses": [
+        200
+      ],
+      "fieldNames": [
+        "ETC_HSHLDCO",
+        "HOUSE_MANAGE_NO",
+        "HOUSE_TY",
+        "INSTT_RECOMEND_HSHLDCO",
+        "LFE_FRST_HSHLDCO",
+        "LTTOT_TOP_AMOUNT",
+        "MNYCH_HSHLDCO",
+        "MODEL_NO",
+        "NWBB_HSHLDCO",
+        "NWWDS_HSHLDCO",
+        "OLD_PARNTS_SUPORT_HSHLDCO",
+        "PBLANC_NO",
+        "SPSPLY_HSHLDCO",
+        "SUPLY_AR",
+        "SUPLY_HSHLDCO",
+        "TRANSR_INSTT_ENFSN_HSHLDCO",
+        "YGMN_HSHLDCO"
+      ],
+      "checks": {
+        "selectedAnnouncement": {
+          "houseManageNo": "2026000426",
+          "noticeNo": "2026000426",
+          "announcementName": "천안 아이파크 시티 4단지",
+          "announcementDate": "2026-09-04",
+          "receiptEnd": "2026-09-16",
+          "resultDate": "2026-09-23"
+        },
+        "uniqueModels": 5,
+        "multipleModelsObserved": true,
+        "sample": {
+          "houseManageNo": "2026000426",
+          "noticeNo": "2026000426",
+          "modelNo": "01",
+          "houseType": "084.8786A",
+          "supplyAreaM2": 112.7105,
+          "exclusiveAreaM2": null,
+          "exclusiveAreaStatus": "not_verified",
+          "maxPriceWon": "589300000"
+        },
+        "exclusiveAreaVerified": false,
+        "priceUnitInSource": "만원"
+      }
+    },
+    {
+      "name": "apt-competition",
+      "status": "passed",
+      "rowCount": 20,
+      "matchedTotal": 20,
+      "pages": 1,
+      "complete": true,
+      "httpStatuses": [
+        200
+      ],
+      "fieldNames": [
+        "CMPET_RATE",
+        "HOUSE_MANAGE_NO",
+        "HOUSE_TY",
+        "MODEL_NO",
+        "PBLANC_NO",
+        "REQ_CNT",
+        "RESIDE_SECD",
+        "RESIDE_SENM",
+        "SUBSCRPT_RANK_CODE",
+        "SUPLY_HSHLDCO"
+      ],
+      "checks": {
+        "selectedAnnouncement": {
+          "houseManageNo": "2026000426",
+          "noticeNo": "2026000426",
+          "announcementName": "천안 아이파크 시티 4단지",
+          "announcementDate": "2026-09-04",
+          "receiptEnd": "2026-09-16",
+          "resultDate": "2026-09-23"
+        },
+        "modelsCrossChecked": true,
+        "unmatchedModelRows": 0,
+        "residenceCodes": [
+          "01",
+          "02"
+        ]
+      }
+    },
+    {
+      "name": "apt-winning-scores",
+      "status": "passed",
+      "rowCount": 10,
+      "matchedTotal": 10,
+      "pages": 1,
+      "complete": true,
+      "httpStatuses": [
+        200
+      ],
+      "fieldNames": [
+        "AVRG_SCORE",
+        "HOUSE_MANAGE_NO",
+        "HOUSE_TY",
+        "LWET_SCORE",
+        "MODEL_NO",
+        "PBLANC_NO",
+        "RESIDE_SECD",
+        "RESIDE_SENM",
+        "TOP_SCORE"
+      ],
+      "checks": {
+        "selectedAnnouncement": {
+          "houseManageNo": "2026000426",
+          "noticeNo": "2026000426",
+          "announcementName": "천안 아이파크 시티 4단지",
+          "announcementDate": "2026-09-04",
+          "receiptEnd": "2026-09-16",
+          "resultDate": "2026-09-23"
+        },
+        "modelsCrossChecked": true,
+        "unmatchedModelRows": 0,
+        "residenceCodes": [
+          "01",
+          "02"
+        ]
+      }
+    },
+    {
+      "name": "apt-special-supply",
+      "status": "passed",
+      "rowCount": 5,
+      "matchedTotal": 5,
+      "pages": 1,
+      "complete": true,
+      "httpStatuses": [
+        200
+      ],
+      "fieldNames": [
+        "CRSPAREA_LFE_FRST_CNT",
+        "CRSPAREA_MNYCH_CNT",
+        "CRSPAREA_NWBB_NWBBSHR_CNT",
+        "CRSPAREA_NWWDS_NMTW_CNT",
+        "CRSPAREA_OPS_CNT",
+        "CRSPAREA_YGMN_CNT",
+        "CTPRVN_LFE_FRST_CNT",
+        "CTPRVN_MNYCH_CNT",
+        "CTPRVN_NWBB_NWBBSHR_CNT",
+        "CTPRVN_NWWDS_NMTW_CNT",
+        "CTPRVN_OPS_CNT",
+        "CTPRVN_YGMN_CNT",
+        "ETC_AREA_LFE_FRST_CNT",
+        "ETC_AREA_MNYCH_CNT",
+        "ETC_AREA_NWBB_NWBBSHR_CNT",
+        "ETC_AREA_NWWDS_NMTW_CNT",
+        "ETC_AREA_OPS_CNT",
+        "ETC_AREA_YGMN_CNT",
+        "HOUSE_MANAGE_NO",
+        "HOUSE_TY",
+        "INSTT_RECOMEND_DCSN_CNT",
+        "INSTT_RECOMEND_HSHLDCO",
+        "INSTT_RECOMEND_PREPAR_CNT",
+        "LFE_FRST_HSHLDCO",
+        "MNYCH_HSHLDCO",
+        "NWBB_NWBBSHR_HSHLDCO",
+        "NWWDS_NMTW_HSHLDCO",
+        "OLD_PARNTS_SUPORT_HSHLDCO",
+        "PBLANC_NO",
+        "SPSPLY_HSHLDCO",
+        "SUBSCRPT_RESULT_NM",
+        "TRANSR_INSTT_ENFSN_CNT",
+        "TRANSR_INSTT_ENFSN_HSHLDCO",
+        "YGMN_HSHLDCO"
+      ],
+      "checks": {
+        "selectedAnnouncement": {
+          "houseManageNo": "2026000426",
+          "noticeNo": "2026000426",
+          "announcementName": "천안 아이파크 시티 4단지",
+          "announcementDate": "2026-09-04",
+          "receiptEnd": "2026-09-16",
+          "resultDate": "2026-09-23"
+        },
+        "modelNoProvided": false,
+        "uniqueHouseTypeMatchRows": 5,
+        "ambiguousHouseTypeRows": 0,
+        "matchingMethod": "공고 키 + HOUSE_TY 유일성 확인; MODEL_NO를 제공한다고 가정하지 않음"
+      }
+    },
+    {
+      "name": "legal-regions-11620",
+      "status": "passed",
+      "rowCount": 4,
+      "matchedTotal": 4,
+      "pages": 1,
+      "complete": true,
+      "httpStatuses": [
+        200
+      ],
+      "fieldNames": [
+        "adpt_de",
+        "locallow_nm",
+        "locat_order",
+        "locat_rm",
+        "locatadd_nm",
+        "locathigh_cd",
+        "locatjijuk_cd",
+        "locatjumin_cd",
+        "region_cd",
+        "ri_cd",
+        "sgg_cd",
+        "sido_cd",
+        "umd_cd"
+      ],
+      "checks": {
+        "districtName": "관악구",
+        "districtCode": "11620",
+        "officialRegionCode": "1162000000",
+        "allCodesTenDigits": true,
+        "sampleLegalDongs": [
+          {
+            "code": "1162000000",
+            "name": "서울특별시 관악구"
+          },
+          {
+            "code": "1162010100",
+            "name": "서울특별시 관악구 봉천동"
+          },
+          {
+            "code": "1162010200",
+            "name": "서울특별시 관악구 신림동"
+          },
+          {
+            "code": "1162010300",
+            "name": "서울특별시 관악구 남현동"
+          }
+        ]
+      }
+    },
+    {
+      "name": "apt-trades-11620-202608",
+      "status": "passed",
+      "rowCount": 119,
+      "matchedTotal": 119,
+      "pages": 2,
+      "complete": true,
+      "httpStatuses": [
+        200
+      ],
+      "fieldNames": [
+        "aptDong",
+        "aptNm",
+        "aptSeq",
+        "bonbun",
+        "bubun",
+        "buildYear",
+        "buyerGbn",
+        "cdealDay",
+        "cdealType",
+        "dealAmount",
+        "dealDay",
+        "dealMonth",
+        "dealYear",
+        "dealingGbn",
+        "estateAgentSggNm",
+        "excluUseAr",
+        "floor",
+        "jibun",
+        "landCd",
+        "landLeaseholdGbn",
+        "rgstDate",
+        "roadNm",
+        "roadNmBonbun",
+        "roadNmBubun",
+        "roadNmCd",
+        "roadNmSeq",
+        "roadNmSggCd",
+        "roadNmbCd",
+        "sggCd",
+        "slerGbn",
+        "umdCd",
+        "umdNm"
+      ],
+      "checks": {
+        "districtName": "관악구",
+        "districtCode": "11620",
+        "contractMonth": "202608",
+        "priceUnitInSource": "만원",
+        "sample": {
+          "apartmentName": "복권",
+          "apartmentSequence": "11620-15",
+          "legalDongCode": "1162010100",
+          "exclusiveAreaM2": 47.61,
+          "priceWon": "310000000",
+          "cancellationStatus": "not_reported",
+          "cancellationDate": null
+        },
+        "legalDongCodeTenDigitRows": 119,
+        "officialLegalDongMatchRows": 119,
+        "reportedCancelledRows": 6,
+        "cancellationUnknownRows": 0,
+        "transactionUniqueIdVerified": false,
+        "duplicatesRemoved": false
+      }
+    },
+    {
+      "name": "legal-regions-11590",
+      "status": "passed",
+      "rowCount": 10,
+      "matchedTotal": 10,
+      "pages": 1,
+      "complete": true,
+      "httpStatuses": [
+        200
+      ],
+      "fieldNames": [
+        "adpt_de",
+        "locallow_nm",
+        "locat_order",
+        "locat_rm",
+        "locatadd_nm",
+        "locathigh_cd",
+        "locatjijuk_cd",
+        "locatjumin_cd",
+        "region_cd",
+        "ri_cd",
+        "sgg_cd",
+        "sido_cd",
+        "umd_cd"
+      ],
+      "checks": {
+        "districtName": "동작구",
+        "districtCode": "11590",
+        "officialRegionCode": "1159000000",
+        "allCodesTenDigits": true,
+        "sampleLegalDongs": [
+          {
+            "code": "1159010100",
+            "name": "서울특별시 동작구 노량진동"
+          },
+          {
+            "code": "1159010200",
+            "name": "서울특별시 동작구 상도동"
+          },
+          {
+            "code": "1159010300",
+            "name": "서울특별시 동작구 상도1동"
+          },
+          {
+            "code": "1159010400",
+            "name": "서울특별시 동작구 본동"
+          },
+          {
+            "code": "1159010500",
+            "name": "서울특별시 동작구 흑석동"
+          }
+        ]
+      }
+    },
+    {
+      "name": "apt-trades-11590-202608",
+      "status": "passed",
+      "rowCount": 123,
+      "matchedTotal": 123,
+      "pages": 2,
+      "complete": true,
+      "httpStatuses": [
+        200
+      ],
+      "fieldNames": [
+        "aptDong",
+        "aptNm",
+        "aptSeq",
+        "bonbun",
+        "bubun",
+        "buildYear",
+        "buyerGbn",
+        "cdealDay",
+        "cdealType",
+        "dealAmount",
+        "dealDay",
+        "dealMonth",
+        "dealYear",
+        "dealingGbn",
+        "estateAgentSggNm",
+        "excluUseAr",
+        "floor",
+        "jibun",
+        "landCd",
+        "landLeaseholdGbn",
+        "rgstDate",
+        "roadNm",
+        "roadNmBonbun",
+        "roadNmBubun",
+        "roadNmCd",
+        "roadNmSeq",
+        "roadNmSggCd",
+        "roadNmbCd",
+        "sggCd",
+        "slerGbn",
+        "umdCd",
+        "umdNm"
+      ],
+      "checks": {
+        "districtName": "동작구",
+        "districtCode": "11590",
+        "contractMonth": "202608",
+        "priceUnitInSource": "만원",
+        "sample": {
+          "apartmentName": "래미안상도3차",
+          "apartmentSequence": "11590-127",
+          "legalDongCode": "1159010200",
+          "exclusiveAreaM2": 84.96,
+          "priceWon": "1800000000",
+          "cancellationStatus": "not_reported",
+          "cancellationDate": null
+        },
+        "legalDongCodeTenDigitRows": 123,
+        "officialLegalDongMatchRows": 123,
+        "reportedCancelledRows": 1,
+        "cancellationUnknownRows": 0,
+        "transactionUniqueIdVerified": false,
+        "duplicatesRemoved": false
+      }
+    },
+    {
+      "name": "legal-regions-11545",
+      "status": "passed",
+      "rowCount": 4,
+      "matchedTotal": 4,
+      "pages": 1,
+      "complete": true,
+      "httpStatuses": [
+        200
+      ],
+      "fieldNames": [
+        "adpt_de",
+        "locallow_nm",
+        "locat_order",
+        "locat_rm",
+        "locatadd_nm",
+        "locathigh_cd",
+        "locatjijuk_cd",
+        "locatjumin_cd",
+        "region_cd",
+        "ri_cd",
+        "sgg_cd",
+        "sido_cd",
+        "umd_cd"
+      ],
+      "checks": {
+        "districtName": "금천구",
+        "districtCode": "11545",
+        "officialRegionCode": "1154500000",
+        "allCodesTenDigits": true,
+        "sampleLegalDongs": [
+          {
+            "code": "1154500000",
+            "name": "서울특별시 금천구"
+          },
+          {
+            "code": "1154510100",
+            "name": "서울특별시 금천구 가산동"
+          },
+          {
+            "code": "1154510200",
+            "name": "서울특별시 금천구 독산동"
+          },
+          {
+            "code": "1154510300",
+            "name": "서울특별시 금천구 시흥동"
+          }
+        ]
+      }
+    },
+    {
+      "name": "apt-trades-11545-202608",
+      "status": "passed",
+      "rowCount": 107,
+      "matchedTotal": 107,
+      "pages": 2,
+      "complete": true,
+      "httpStatuses": [
+        200
+      ],
+      "fieldNames": [
+        "aptDong",
+        "aptNm",
+        "aptSeq",
+        "bonbun",
+        "bubun",
+        "buildYear",
+        "buyerGbn",
+        "cdealDay",
+        "cdealType",
+        "dealAmount",
+        "dealDay",
+        "dealMonth",
+        "dealYear",
+        "dealingGbn",
+        "estateAgentSggNm",
+        "excluUseAr",
+        "floor",
+        "jibun",
+        "landCd",
+        "landLeaseholdGbn",
+        "rgstDate",
+        "roadNm",
+        "roadNmBonbun",
+        "roadNmBubun",
+        "roadNmCd",
+        "roadNmSeq",
+        "roadNmSggCd",
+        "roadNmbCd",
+        "sggCd",
+        "slerGbn",
+        "umdCd",
+        "umdNm"
+      ],
+      "checks": {
+        "districtName": "금천구",
+        "districtCode": "11545",
+        "contractMonth": "202608",
+        "priceUnitInSource": "만원",
+        "sample": {
+          "apartmentName": "독산현대",
+          "apartmentSequence": "11545-8",
+          "legalDongCode": "1154510200",
+          "exclusiveAreaM2": 83.73,
+          "priceWon": "660000000",
+          "cancellationStatus": "not_reported",
+          "cancellationDate": null
+        },
+        "legalDongCodeTenDigitRows": 107,
+        "officialLegalDongMatchRows": 107,
+        "reportedCancelledRows": 0,
+        "cancellationUnknownRows": 0,
+        "transactionUniqueIdVerified": false,
+        "duplicatesRemoved": false
+      }
+    }
+  ],
+  "warnings": [],
+  "rawEvidenceDirectory": "database-project/.local/api-validation/2026-09-29T05-47-27-264Z",
+  "limitations": [
+    "전국 공고는 20건 표본이며 최신순 정렬은 검증하지 않았다.",
+    "세 구의 한 계약월을 확인했다. 최근 12개월 전체·주소 매칭·가격 비교·DB 적재를 검증한 것은 아니다.",
+    "주택형 전용면적은 미확인이다. 공급면적을 실거래 전용면적으로 사용하지 않는다.",
+    "빈 해제 필드는 수집 당시 공개 응답에 해제 표시가 없음을 뜻하며 향후 정정 가능성을 없애지 않는다.",
+    "원본 응답 파일은 인증키를 제거한 로컬 검증 자료이며 GitHub 업로드 대상이 아니다."
+  ]
+}

@@ -1,0 +1,23 @@
+# 인증키·로컬 설정
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# 실행 환경·캐시
+.venv/
+__pycache__/
+*.pyc
+node_modules/
+dist/
+.next/
+out/
+coverage/
+*.tsbuildinfo
+.DS_Store
+
+# 원본 응답·개인 입력·로컬 검증 산출물
+database-project/database/raw/
+database-project/database/local/
+database-project/.local/

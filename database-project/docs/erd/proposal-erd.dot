@@ -1,0 +1,124 @@
+// 청약 의사결정 노트 / 15개 예상 테이블의 PK/FK 관계 초안
+// Graphviz: dot -Tsvg proposal-erd.dot -o proposal-erd.svg
+// 실제 업무 속성과 표본 검증 전의 키 후보는 proposal.md를 참조한다.
+digraph proposal_erd {
+  graph [rankdir=LR, bgcolor="white", pad="0.35", nodesep="0.38", ranksep="0.75",
+         compound=true, splines=polyline, fontname="Arial", fontsize=16,
+         labelloc=t, label="청약 의사결정 노트 · 1차 ERD 초안\n15개 테이블 / PK·FK 중심 / 실제 API 응답 검증 전"];
+  node [shape=plain, fontname="Arial", fontsize=11];
+  edge [fontname="Arial", fontsize=9, color="#64748B", arrowsize=0.5,
+        arrowhead=none, labeldistance=1.6, labelangle=25];
+
+  subgraph cluster_supply {
+    label="공고 · 공급 · 접수 결과"; color="#C8D9EE"; style="rounded"; fontcolor="#24436B";
+    announcement [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#4F75A8">
+      <TR><TD BGCOLOR="#E8F0FC"><B>announcement · 공고</B></TD></TR>
+      <TR><TD ALIGN="LEFT">PK  id</TD></TR><TR><TD ALIGN="LEFT">FK  last_source_record_id</TD></TR>
+    </TABLE>>];
+    unit_type [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#4F75A8">
+      <TR><TD BGCOLOR="#E8F0FC"><B>unit_type · 주택형</B></TD></TR>
+      <TR><TD ALIGN="LEFT">PK  id</TD></TR><TR><TD ALIGN="LEFT">FK  announcement_id</TD></TR>
+      <TR><TD ALIGN="LEFT">FK  last_source_record_id</TD></TR>
+    </TABLE>>];
+    allocation [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#4F75A8">
+      <TR><TD BGCOLOR="#E8F0FC"><B>allocation · 공급 물량</B></TD></TR>
+      <TR><TD ALIGN="LEFT">PK  id</TD></TR><TR><TD ALIGN="LEFT">FK  unit_type_id</TD></TR>
+      <TR><TD ALIGN="LEFT">FK  last_source_record_id</TD></TR>
+    </TABLE>>];
+    competition_snapshot [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#4F75A8">
+      <TR><TD BGCOLOR="#E8F0FC"><B>competition_snapshot · 경쟁률</B></TD></TR>
+      <TR><TD ALIGN="LEFT">PK  id</TD></TR><TR><TD ALIGN="LEFT">FK  unit_type_id</TD></TR>
+      <TR><TD ALIGN="LEFT">FK  source_record_id</TD></TR>
+    </TABLE>>];
+    winning_score_snapshot [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#4F75A8">
+      <TR><TD BGCOLOR="#E8F0FC"><B>winning_score_snapshot · 가점</B></TD></TR>
+      <TR><TD ALIGN="LEFT">PK  id</TD></TR><TR><TD ALIGN="LEFT">FK  unit_type_id</TD></TR>
+      <TR><TD ALIGN="LEFT">FK  source_record_id</TD></TR>
+    </TABLE>>];
+  }
+  subgraph cluster_region {
+    label="지역 · 주소 · 매매 거래"; color="#B8DDD9"; style="rounded"; fontcolor="#1F625A";
+    region [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#418B80">
+      <TR><TD BGCOLOR="#E7F5F0"><B>region · 법정동 지역</B></TD></TR>
+      <TR><TD ALIGN="LEFT">PK  region_code</TD></TR><TR><TD ALIGN="LEFT">FK  parent_code (nullable)</TD></TR>
+      <TR><TD ALIGN="LEFT">FK  last_source_record_id</TD></TR>
+    </TABLE>>];
+    address_match [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#418B80">
+      <TR><TD BGCOLOR="#E7F5F0"><B>address_match · 주소 매칭</B></TD></TR>
+      <TR><TD ALIGN="LEFT">PK  id</TD></TR><TR><TD ALIGN="LEFT">FK  announcement_id</TD></TR>
+      <TR><TD ALIGN="LEFT">FK  region_code (nullable)</TD></TR>
+    </TABLE>>];
+    apartment_trade [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#418B80">
+      <TR><TD BGCOLOR="#E7F5F0"><B>apartment_trade · 매매 거래</B></TD></TR>
+      <TR><TD ALIGN="LEFT">PK  id</TD></TR><TR><TD ALIGN="LEFT">FK  region_code</TD></TR>
+      <TR><TD ALIGN="LEFT">FK  last_source_record_id</TD></TR>
+    </TABLE>>];
+  }
+  subgraph cluster_user {
+    label="회원 · 개인 기록"; color="#C9D5F0"; style="rounded"; fontcolor="#435887";
+    app_user [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#687CAD">
+      <TR><TD BGCOLOR="#EEF0FC"><B>app_user · 회원</B></TD></TR><TR><TD ALIGN="LEFT">PK  id</TD></TR>
+    </TABLE>>];
+    watchlist [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#687CAD">
+      <TR><TD BGCOLOR="#EEF0FC"><B>watchlist · 관심 공고</B></TD></TR>
+      <TR><TD ALIGN="LEFT">PK  id</TD></TR><TR><TD ALIGN="LEFT">FK  app_user_id</TD></TR>
+      <TR><TD ALIGN="LEFT">FK  announcement_id</TD></TR>
+    </TABLE>>];
+    user_note [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#687CAD">
+      <TR><TD BGCOLOR="#EEF0FC"><B>user_note · 개인 노트</B></TD></TR>
+      <TR><TD ALIGN="LEFT">PK  id</TD></TR><TR><TD ALIGN="LEFT">FK  watchlist_id</TD></TR>
+    </TABLE>>];
+  }
+  subgraph cluster_comparison {
+    label="비교 조건 · 당시 근거"; color="#EDD9AF"; style="rounded"; fontcolor="#886225";
+    comparison_set [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#AE8A4C">
+      <TR><TD BGCOLOR="#FFF3DB"><B>comparison_set · 비교 1회</B></TD></TR>
+      <TR><TD ALIGN="LEFT">PK  id</TD></TR><TR><TD ALIGN="LEFT">FK  app_user_id</TD></TR>
+      <TR><TD ALIGN="LEFT">FK  unit_type_id</TD></TR><TR><TD ALIGN="LEFT">FK  region_code</TD></TR>
+    </TABLE>>];
+    comparison_trade [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#AE8A4C">
+      <TR><TD BGCOLOR="#FFF3DB"><B>comparison_trade · 포함 거래</B></TD></TR>
+      <TR><TD ALIGN="LEFT">PK/FK  comparison_set_id</TD></TR><TR><TD ALIGN="LEFT">PK/FK  apartment_trade_id</TD></TR>
+      <TR><TD ALIGN="LEFT">FK  source_record_id</TD></TR>
+    </TABLE>>];
+  }
+  subgraph cluster_ingestion {
+    label="수집 · 출처 추적"; color="#DFD1E9"; style="rounded"; fontcolor="#755182";
+    ingestion_run [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#9871A9">
+      <TR><TD BGCOLOR="#F3EAF9"><B>ingestion_run · 수집 실행</B></TD></TR><TR><TD ALIGN="LEFT">PK  id</TD></TR>
+    </TABLE>>];
+    source_record [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#9871A9">
+      <TR><TD BGCOLOR="#F3EAF9"><B>source_record · 원본 관측</B></TD></TR>
+      <TR><TD ALIGN="LEFT">PK  id</TD></TR><TR><TD ALIGN="LEFT">FK  ingestion_run_id</TD></TR>
+    </TABLE>>];
+  }
+
+  announcement -> unit_type [taillabel="1", headlabel="0..N"];
+  unit_type -> allocation [taillabel="1", headlabel="0..N"];
+  unit_type -> competition_snapshot [taillabel="1", headlabel="0..N"];
+  unit_type -> winning_score_snapshot [taillabel="1", headlabel="0..N"];
+  region -> region [taillabel="0..1", headlabel="0..N", label="계층"];
+  announcement -> address_match [taillabel="1", headlabel="0..N"];
+  region -> address_match [taillabel="0..1", headlabel="0..N"];
+  region -> apartment_trade [taillabel="1", headlabel="0..N"];
+  app_user -> watchlist [taillabel="1", headlabel="0..N"];
+  announcement -> watchlist [taillabel="1", headlabel="0..N"];
+  watchlist -> user_note [taillabel="1", headlabel="0..N"];
+  app_user -> comparison_set [taillabel="1", headlabel="0..N"];
+  unit_type -> comparison_set [taillabel="1", headlabel="0..N"];
+  region -> comparison_set [taillabel="1", headlabel="0..N"];
+  comparison_set -> comparison_trade [taillabel="1", headlabel="0..N", color="#AD8040", penwidth=1.5];
+  apartment_trade -> comparison_trade [taillabel="1", headlabel="0..N", color="#AD8040", penwidth=1.5];
+  ingestion_run -> source_record [taillabel="1", headlabel="0..N"];
+
+  // 점선은 이 SVG에서 원본 출처 FK를 뜻한다. 모든 부모는 원본 관측 1건이다.
+  edge [style=dashed, color="#A894B2", fontcolor="#8B7397", constraint=false];
+  source_record -> announcement;
+  source_record -> unit_type;
+  source_record -> allocation;
+  source_record -> region;
+  source_record -> apartment_trade;
+  source_record -> competition_snapshot;
+  source_record -> winning_score_snapshot;
+  source_record -> comparison_trade;
+}
